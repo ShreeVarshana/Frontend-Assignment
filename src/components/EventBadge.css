@@ -1,0 +1,129 @@
+/* EventBadge.css */
+.event-badge {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+  border-left: 4px solid #0ea5e9;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  color: #0c4a6e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-wrap: break-word;
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.event-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.event-badge.conflict {
+  background: linear-gradient(135deg, #fef2f2 0%, #fff5f5 100%);
+  border-left-color: #ef4444;
+  color: #7f1d1d;
+  animation: pulse-conflict 2s infinite;
+}
+
+@keyframes pulse-conflict {
+  0% {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  }
+
+  100% {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.event-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+  line-height: 1.2;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-time {
+  font-size: 0.65rem;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+.conflict-indicator {
+  font-size: 0.7rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  animation: warning-blink 1.5s infinite;
+}
+
+@keyframes warning-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Event type variations */
+.event-badge.meeting {
+  background: linear-gradient(135deg, #f3e8ff 0%, #faf5ff 100%);
+  border-left-color: #8b5cf6;
+  color: #581c87;
+}
+
+.event-badge.deadline {
+  background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+  border-left-color: #f59e0b;
+  color: #78350f;
+}
+
+.event-badge.personal {
+  background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);
+  border-left-color: #10b981;
+  color: #064e3b;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .event-badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.4rem;
+  }
+
+  .event-time {
+    font-size: 0.6rem;
+  }
+
+  .conflict-indicator {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-badge {
+    font-size: 0.6rem;
+    padding: 0.25rem 0.35rem;
+  }
+
+  .event-time {
+    font-size: 0.55rem;
+  }
+
+  .event-title {
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+  }
+}
