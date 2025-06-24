@@ -2,14 +2,14 @@
   {
     "id": 1,
     "title": "Team Meeting",
-    "date": "2025-06-25",
+    "date": "2025-06-24",
     "time": "09:00",
     "duration": 60
   },
   {
     "id": 2,
     "title": "Project Review",
-    "date": "2025-06-25",
+    "date": "2025-06-24",
     "time": "09:30",
     "duration": 90
   },
@@ -17,56 +17,35 @@
     "id": 3,
     "title": "Client Call",
     "date": "2025-06-25",
-    "time": "14:00",
-    "duration": 30
+    "time": "10:30",
+    "duration": 45
   },
   {
     "id": 4,
-    "title": "Design Workshop",
+    "title": "Deadline",
     "date": "2025-06-26",
-    "time": "10:00",
-    "duration": 120
+    "time": "17:00",
+    "duration": 30
   },
   {
     "id": 5,
-    "title": "Code Review",
-    "date": "2025-06-26",
-    "time": "11:00",
-    "duration": 45
+    "title": "Training Session",
+    "date": "2025-06-27",
+    "time": "09:30",
+    "duration": 120
   },
   {
     "id": 6,
     "title": "Lunch Meeting",
-    "date": "2025-06-27",
+    "date": "2025-06-28",
     "time": "12:00",
-    "duration": 90
-  },
-  {
-    "id": 7,
-    "title": "Sprint Planning",
-    "date": "2025-06-30",
-    "time": "09:00",
-    "duration": 120
-  },
-  {
-    "id": 8,
-    "title": "Standup Meeting",
-    "date": "2025-06-30",
-    "time": "09:30",
-    "duration": 30
-  },
-  {
-    "id": 9,
-    "title": "Product Demo",
-    "date": "2025-07-01",
-    "time": "15:00",
     "duration": 60
   },
   {
-    "id": 10,
-    "title": "Team Retrospective",
-    "date": "2025-07-02",
-    "time": "16:00",
-    "duration": 90
+    "id": 7,
+    "title": "Code Review",
+    "date": "2025-06-29",
+    "time": "15:00",
+    "duration": 75
   }
 ]

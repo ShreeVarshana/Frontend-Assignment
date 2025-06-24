@@ -66,7 +66,7 @@ body,
 }
 
 .planify-title {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 900;
   color: #1976d2;
   letter-spacing: 2px;
@@ -77,7 +77,7 @@ body,
 
 .calendar-header {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 0.7rem 1rem;
   background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
@@ -85,12 +85,52 @@ body,
   border-bottom: 2px solid #e0e7ff;
   box-shadow: 0 2px 8px rgba(56, 189, 248, 0.07);
   font-size: 1rem;
+  position: relative;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 1rem;
+}
+
+.date-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.month-year {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #f1f5f9;
+  text-shadow: 0 1px 2px #6366f1;
+}
+
+.picker-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.picker-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  backdrop-filter: blur(4px);
+}
+
+.picker-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
 }
 
 .calendar-body {
@@ -105,7 +145,6 @@ body,
 }
 
 .calendar-panel {
-  /* 2.5/4 = 62.5% */
   width: 62.5%;
   flex: 2.5 2.5 0%;
   min-width: 0;
@@ -127,7 +166,6 @@ body,
 }
 
 .dayview-panel {
-  /* 1.5/4 = 37.5% */
   width: 37.5%;
   flex: 1.5 1.5 0%;
   min-width: 0;
@@ -147,78 +185,7 @@ body,
   border-color: #60a5fa;
 }
 
-@media (max-width: 900px) {
-  .calendar-body {
-    flex-direction: column;
-    height: auto;
-    min-height: 0;
-  }
-
-  .calendar-panel,
-  .dayview-panel {
-    width: 100vw;
-    max-width: none;
-    min-width: 0;
-    padding: 1.2rem;
-    border-right: none;
-    border-bottom: 2px dashed #e0e7ff;
-    height: auto;
-    flex: none;
-  }
-
-  .calendar-panel {
-    border-bottom: 2px dashed #e0e7ff;
-  }
-
-  .dayview-panel {
-    border-bottom: none;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .calendar-panel,
-  .dayview-panel {
-    padding: 0.7rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .calendar-header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.1rem 1rem;
-  }
-
-  .planify-title {
-    font-size: 1.5rem;
-    margin: 0.7rem 0 0.3rem 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-container {
-    padding: 0;
-  }
-
-  .calendar-body {
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .calendar-wrapper {
-    width: 100vw;
-    max-width: none;
-    border-radius: 0;
-  }
-
-  .calendar-panel,
-  .dayview-panel {
-    padding: 0.7rem;
-  }
-}
-
-/* Header */
+/* Navigation Buttons */
 .nav-button {
   background: #f1f5f9;
   border: 1.5px solid #c7d2fe;
@@ -248,7 +215,7 @@ body,
   font-weight: 600;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
-  margin: 0 1.2rem;
+  margin: 0 0 1rem 0;
   box-shadow: 0 2px 8px rgba(14, 165, 233, 0.08);
   cursor: pointer;
   transition: background 0.18s, color 0.18s, box-shadow 0.18s;
@@ -257,6 +224,7 @@ body,
   display: flex;
   align-items: center;
   height: 44px;
+  width: auto;
 }
 
 .today-button:hover,
@@ -264,32 +232,6 @@ body,
   background: #e0f2fe;
   color: #0369a1;
   box-shadow: 0 4px 16px rgba(14, 165, 233, 0.13);
-}
-
-.date-controls {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-
-.month-year {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: #f1f5f9;
-  text-shadow: 0 1px 2px #6366f1;
-}
-
-.clickable {
-  cursor: pointer;
-  padding: 0.5rem 0.7rem;
-  border-radius: 8px;
-  transition: background 0.18s;
-}
-
-.clickable:hover {
-  background: rgba(255, 255, 255, 0.18);
 }
 
 /* Dropdowns */
@@ -307,6 +249,14 @@ body,
   overflow-y: auto;
   border-radius: 10px;
   min-width: 130px;
+}
+
+.month-dropdown {
+  min-width: 150px;
+}
+
+.year-dropdown {
+  min-width: 100px;
 }
 
 .dropdown-item {
@@ -357,132 +307,149 @@ body,
   }
 }
 
-.new-header-layout {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem 1.2rem 2rem;
-  background: linear-gradient(90deg, #e3f0ff 0%, #f8fafc 100%);
-  border-bottom: 2px solid #e0e7ff;
-  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.07);
-  gap: 1.5rem;
+@media (max-width: 900px) {
+  .calendar-body {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+  }
+
+  .calendar-panel,
+  .dayview-panel {
+    width: 100vw;
+    max-width: none;
+    min-width: 0;
+    padding: 1.2rem;
+    border-right: none;
+    border-bottom: 2px dashed #e0e7ff;
+    height: auto;
+    flex: none;
+  }
+
+  .calendar-panel {
+    border-bottom: 2px dashed #e0e7ff;
+  }
+
+  .dayview-panel {
+    border-bottom: none;
+  }
+
+  .planify-title {
+    font-size: 1.6rem;
+  }
+
+  .month-year {
+    font-size: 1.2rem;
+  }
+
+  .picker-button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+  }
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  position: relative;
+@media (max-width: 768px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .header-left {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .planify-title {
+    font-size: 1.4rem;
+    margin: 0.3rem 0;
+  }
+
+  .month-year {
+    font-size: 1rem;
+  }
+
+  .picker-button {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .nav-button {
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+  }
+
+  .calendar-panel,
+  .dayview-panel {
+    padding: 0.8rem;
+  }
 }
 
-.month-year-label {
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: #1976d2;
-  letter-spacing: 1px;
-  margin: 0 0.5rem;
+@media (max-width: 600px) {
+
+  .calendar-panel,
+  .dayview-panel {
+    padding: 0.7rem;
+  }
+
+  .header-left {
+    gap: 0.5rem;
+  }
+
+  .date-display {
+    gap: 0.3rem;
+  }
+
+  .picker-buttons {
+    gap: 0.3rem;
+  }
 }
 
-.month-dropdown-btn,
-.year-dropdown-btn {
-  background: #fff;
-  border: 1.5px solid #e0e7ff;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1976d2;
-  padding: 0.4rem 1.1rem;
-  cursor: pointer;
-  transition: background 0.15s, border 0.15s;
-}
+@media (max-width: 480px) {
+  .app-container {
+    padding: 0;
+  }
 
-.month-dropdown-btn:hover,
-.year-dropdown-btn:hover {
-  background: #e3f0ff;
-  border-color: #1976d2;
-}
+  .calendar-wrapper {
+    width: 100vw;
+    max-width: none;
+    border-radius: 0;
+  }
 
-.right-dropdown {
-  position: absolute;
-  left: auto;
-  min-width: 120px;
-  top: 100%;
-  margin-top: 0.2rem;
-  z-index: 1002;
-}
+  .calendar-panel,
+  .dayview-panel {
+    padding: 0.5rem;
+  }
 
-.calendar-body {
-  overflow: visible;
-}
+  .planify-title {
+    font-size: 1.2rem;
+  }
 
-.back-button {
-  background: #1976d2;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.18s, box-shadow 0.18s;
-  font-size: 1rem;
-  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.13);
-  margin-bottom: 0.5rem;
-}
+  .month-year {
+    font-size: 0.9rem;
+  }
 
-.back-button:hover {
-  background: #1251a3;
-}
+  .picker-button {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+  }
 
-.calendar-footer-controls {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.7rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  width: 100%;
-}
+  .nav-button {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
 
-.year-dropdown-btn {
-  position: relative;
-}
+  .calendar-header {
+    padding: 0.8rem 0.5rem;
+  }
 
-.calendar-grid-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  padding: 0 0.5rem;
-  position: relative;
-}
-
-.calendar-grid-labels {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-
-.calendar-grid-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  position: relative;
-}
-
-.calendar-panel .right-dropdown {
-  left: auto;
-  right: 0;
-  top: 100%;
-  margin-top: 0.2rem;
-  z-index: 1002;
-}
-
-.dayview-panel .today-button {
-  margin-bottom: 1.1rem;
-  margin-left: 0;
-  margin-right: 0;
-  width: auto;
-  display: inline-flex;
+  .header-left {
+    gap: 0.3rem;
+  }
 }
 
 @keyframes fadeIn {
