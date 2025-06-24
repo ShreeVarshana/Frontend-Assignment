@@ -1,3 +1,4 @@
+// App.jsx
 import React, { useState, useEffect } from "react";
 import Calendar from "./components/Calendar";
 import DayView from "./components/DayView";
@@ -17,7 +18,7 @@ const yearRangeOptions = [
 
 export default function App() {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs()); // today by default
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [showYearPicker, setShowYearPicker] = useState(false);
   const [showYearRangePicker, setShowYearRangePicker] = useState(false);
@@ -31,13 +32,8 @@ export default function App() {
     setYearOptions(years);
   }, [selectedYearRange]);
 
-  const handlePrevMonth = () => {
-    setCurrentDate(currentDate.subtract(1, "month"));
-  };
-
-  const handleNextMonth = () => {
-    setCurrentDate(currentDate.add(1, "month"));
-  };
+  const handlePrevMonth = () => setCurrentDate(currentDate.subtract(1, "month"));
+  const handleNextMonth = () => setCurrentDate(currentDate.add(1, "month"));
 
   const handleMonthSelect = (monthIndex) => {
     setCurrentDate(currentDate.month(monthIndex));
@@ -65,89 +61,81 @@ export default function App() {
     setSelectedDate(date);
   };
 
-  const handleBackToMonth = () => {
-    setSelectedDate(null);
+  const handleToday = () => {
+    const today = dayjs();
+    setCurrentDate(today);
+    setSelectedDate(today);
   };
 
   return (
     <div className="app-container" onClick={handleOverlayClick}>
       <div className="calendar-wrapper" onClick={(e) => e.stopPropagation()}>
-        {selectedDate ? (
-          <DayView
-            selectedDate={selectedDate}
-            events={eventsData}
-            onBackToMonth={handleBackToMonth}
-          />
-        ) : (
-          <>
-            <div className="calendar-header">
-              <button onClick={handlePrevMonth} className="nav-button">‹</button>
+        <div className="calendar-header">
+          <button onClick={handlePrevMonth} className="nav-button">‹</button>
 
-              <div className="date-controls">
-                {/* Month */}
-                <span className="month-year clickable" onClick={(e) => {
-                  e.stopPropagation();
-                  setShowMonthPicker(!showMonthPicker);
-                  setShowYearPicker(false);
-                  setShowYearRangePicker(false);
-                }}>
-                  {currentDate.format("MMMM")}
-                </span>
+          <div className="date-controls">
+            <span className="month-year clickable" onClick={(e) => {
+              e.stopPropagation();
+              setShowMonthPicker(!showMonthPicker);
+              setShowYearPicker(false);
+              setShowYearRangePicker(false);
+            }}>
+              {currentDate.format("MMMM")}
+            </span>
 
-                {/* Year */}
-                <span className="month-year clickable" onClick={(e) => {
-                  e.stopPropagation();
-                  setShowYearRangePicker(!showYearRangePicker);
-                  setShowYearPicker(false);
-                  setShowMonthPicker(false);
-                }}>
-                  {currentDate.format("YYYY")}
-                </span>
+            <span className="month-year clickable" onClick={(e) => {
+              e.stopPropagation();
+              setShowYearRangePicker(!showYearRangePicker);
+              setShowYearPicker(false);
+              setShowMonthPicker(false);
+            }}>
+              {currentDate.format("YYYY")}
+            </span>
 
-                {/* Month Picker */}
-                {showMonthPicker && (
-                  <div className="dropdown">
-                    {monthNames.map((m, i) => (
-                      <div key={m} className="dropdown-item" onClick={() => handleMonthSelect(i)}>
-                        {m}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Year Range Picker */}
-                {showYearRangePicker && (
-                  <div className="dropdown">
-                    {yearRangeOptions.map((range) => (
-                      <div key={range} className="dropdown-item" onClick={() => handleYearRangeSelect(range)}>
-                        {range}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Year Picker */}
-                {showYearPicker && (
-                  <div className="dropdown">
-                    {yearOptions.map((y) => (
-                      <div key={y} className="dropdown-item" onClick={() => handleYearSelect(y)}>
-                        {y}
-                      </div>
-                    ))}
-                  </div>
-                )}
+            {showMonthPicker && (
+              <div className="dropdown">
+                {monthNames.map((m, i) => (
+                  <div key={m} className="dropdown-item" onClick={() => handleMonthSelect(i)}>{m}</div>
+                ))}
               </div>
+            )}
 
-              <button onClick={handleNextMonth} className="nav-button">›</button>
-            </div>
+            {showYearRangePicker && (
+              <div className="dropdown">
+                {yearRangeOptions.map((range) => (
+                  <div key={range} className="dropdown-item" onClick={() => handleYearRangeSelect(range)}>{range}</div>
+                ))}
+              </div>
+            )}
 
+            {showYearPicker && (
+              <div className="dropdown">
+                {yearOptions.map((y) => (
+                  <div key={y} className="dropdown-item" onClick={() => handleYearSelect(y)}>{y}</div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <button onClick={handleToday} className="today-button">Today</button>
+          <button onClick={handleNextMonth} className="nav-button">›</button>
+        </div>
+
+        <div className="calendar-body">
+          <div className="calendar-panel">
             <Calendar
               currentDate={currentDate}
               events={eventsData}
               onDateClick={handleDateClick}
             />
-          </>
-        )}
+          </div>
+          <div className="dayview-panel">
+            <DayView
+              selectedDate={selectedDate}
+              events={eventsData}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

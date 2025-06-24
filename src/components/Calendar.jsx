@@ -60,6 +60,8 @@ export default function Calendar({ currentDate, events, onDateClick }) {
       .sort((a, b) => a.time.localeCompare(b.time));
   };
 
+  const MAX_EVENTS_DISPLAY = 2;
+
   return (
     <div className="calendar">
       {/* Weekday headers */}
@@ -77,23 +79,35 @@ export default function Calendar({ currentDate, events, onDateClick }) {
           const dayEvents = getEventsForDate(day);
           const isCurrentMonth = day.month() === currentDate.month();
           const isToday = day.isSame(today, "day");
+          const showMore = dayEvents.length > MAX_EVENTS_DISPLAY;
+          const visibleEvents = dayEvents.slice(0, MAX_EVENTS_DISPLAY);
 
           return (
             <div
               key={day.format("YYYY-MM-DD")}
-              className={`day ${isCurrentMonth ? "current-month" : "other-month"} ${isToday ? "today" : ""
-                }`}
+              className={`day ${isCurrentMonth ? "current-month" : "other-month"} ${isToday ? "today" : ""}`}
               onClick={() => onDateClick(day)}
+              tabIndex={0}
+              aria-label={`Day ${day.format("D MMMM YYYY")}${isToday ? ', today' : ''}${isCurrentMonth ? '' : ', not in current month'}`}
+              role="button"
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  onDateClick(day);
+                }
+              }}
             >
               <div className="date-number">{day.format("D")}</div>
               <div className="events">
-                {dayEvents.map(event => (
+                {visibleEvents.map(event => (
                   <EventBadge
                     key={event.id}
                     event={event}
                     hasConflict={conflictMap.has(event.id)}
                   />
                 ))}
+                {showMore && (
+                  <div className="more-indicator">+{dayEvents.length - MAX_EVENTS_DISPLAY} more</div>
+                )}
               </div>
             </div>
           );
