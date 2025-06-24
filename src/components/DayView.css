@@ -68,6 +68,16 @@
   margin-top: 1.5rem;
 }
 
+.dayview-event.conflict {
+  border-left: 4px solid #ef4444;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.dayview-event.conflict .event-title {
+  color: #b91c1c;
+}
+
 @media (max-width: 1024px) {
   .dayview {
     padding: 1.2rem 0.7rem;

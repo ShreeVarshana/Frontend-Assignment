@@ -1,7 +1,7 @@
 /* Calendar.css */
 .calendar {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   background: #fff;
   border-radius: 18px;
@@ -22,6 +22,8 @@
   border-bottom: 2px solid #e2e8f0;
   font-size: 1.1rem;
   letter-spacing: 0.5px;
+  gap: 0;
+  margin: 0;
 }
 
 .weekday {
@@ -29,15 +31,15 @@
   color: #64748b;
   text-transform: uppercase;
   background: transparent;
+  margin: 0;
 }
 
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   width: 100%;
-  aspect-ratio: 7 / 6;
-  gap: 0;
   background: transparent;
+  gap: 0;
 }
 
 .day {
@@ -149,6 +151,26 @@
   width: fit-content;
 }
 
+.events.all-events-scroll {
+  max-height: 140px;
+  overflow-y: auto;
+  width: 100%;
+  padding-right: 2px;
+}
+
+.events.all-events-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.events.all-events-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.events.all-events-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
 @media (max-width: 1024px) {
   .calendar {
     max-width: 100vw;
@@ -203,4 +225,18 @@
   .date-number {
     font-size: 0.7rem;
   }
+}
+
+.calendar-controls-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 0rem;
 }

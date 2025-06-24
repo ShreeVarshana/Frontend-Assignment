@@ -60,37 +60,9 @@ export default function App() {
         <div className="calendar-header">
           <div className="header-left">
             <button onClick={handlePrevMonth} className="nav-button">‹</button>
-            <span className="month-year clickable" onClick={(e) => {
-              e.stopPropagation();
-              setShowMonthPicker(!showMonthPicker);
-              setShowYearPicker(false);
-            }}>
-              {currentDate.format("MMMM")}
-            </span>
-            <span className="month-year clickable" onClick={(e) => {
-              e.stopPropagation();
-              setShowYearPicker(!showYearPicker);
-              setShowMonthPicker(false);
-            }}>
-              {currentDate.format("YYYY")}
-            </span>
+            <span className="month-year">{currentDate.format("MMMM")}</span>
+            <span className="month-year">{currentDate.format("YYYY")}</span>
             <button onClick={handleNextMonth} className="nav-button">›</button>
-
-            {showMonthPicker && (
-              <div className="dropdown">
-                {monthNames.map((m, i) => (
-                  <div key={m} className="dropdown-item" onClick={() => handleMonthSelect(i)}>{m}</div>
-                ))}
-              </div>
-            )}
-
-            {showYearPicker && (
-              <div className="dropdown">
-                {yearOptions.map((y) => (
-                  <div key={y} className="dropdown-item" onClick={() => handleYearSelect(y)}>{y}</div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
 

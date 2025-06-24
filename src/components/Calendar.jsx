@@ -60,32 +60,26 @@ export default function Calendar({ currentDate, events, onDateClick }) {
       .sort((a, b) => a.time.localeCompare(b.time));
   };
 
-  const MAX_EVENTS_DISPLAY = 2;
-
   return (
-    <div className="calendar simple-calendar">
+    <div className="calendar">
       {/* Weekday headers */}
-      <div className="calendar-weekdays simple-weekdays">
+      <div className="calendar-weekdays">
         {weekdays.map(weekday => (
-          <div key={weekday} className="weekday simple-weekday">
+          <div key={weekday} className="weekday">
             {weekday}
           </div>
         ))}
       </div>
-
       {/* Calendar days */}
-      <div className="calendar-days simple-days">
+      <div className="calendar-days">
         {calendarDays.map(day => {
           const dayEvents = getEventsForDate(day);
           const isCurrentMonth = day.month() === currentDate.month();
           const isToday = day.isSame(today, "day");
-          const showMore = dayEvents.length > MAX_EVENTS_DISPLAY;
-          const visibleEvents = dayEvents.slice(0, MAX_EVENTS_DISPLAY);
 
           return (
             <div
               key={day.format("YYYY-MM-DD")}
-
               className={`day ${isCurrentMonth ? "current-month" : "other-month"} ${isToday ? "today" : ""}`}
               onClick={() => onDateClick(day)}
               tabIndex={0}
@@ -98,8 +92,8 @@ export default function Calendar({ currentDate, events, onDateClick }) {
               }}
             >
               <div className="date-number">{day.format("D")}</div>
-              <div className="events">
-                {visibleEvents.map(event => (
+              <div className="events all-events-scroll">
+                {dayEvents.map(event => (
                   <EventBadge
                     key={event.id}
                     event={event}
@@ -107,9 +101,6 @@ export default function Calendar({ currentDate, events, onDateClick }) {
                     showTime={false}
                   />
                 ))}
-                {showMore && (
-                  <div className="more-indicator">+{dayEvents.length - MAX_EVENTS_DISPLAY} more</div>
-                )}
               </div>
             </div>
           );
