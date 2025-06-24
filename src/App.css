@@ -2,7 +2,7 @@
 .app-container {
   background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
   min-height: 100vh;
-  padding: 0.5rem 0.1rem;
+  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@
 
 .calendar-wrapper {
   width: 100%;
-  max-width: 1800px;
+  max-width: 1400px;
   margin: 0 auto;
   background: #fff;
   border-radius: 18px;
@@ -23,10 +23,19 @@
   min-height: 80vh;
 }
 
-/* Header */
+.planify-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1976d2;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 1.1rem 0 0.2rem 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .calendar-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 1.7rem 2.2rem;
   background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
@@ -35,6 +44,109 @@
   box-shadow: 0 2px 8px rgba(56, 189, 248, 0.07);
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.calendar-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 600px;
+  height: calc(100vh - 120px);
+  overflow: hidden;
+  gap: 0;
+}
+
+.calendar-panel {
+  width: 50%;
+  min-width: 0;
+  background: #f3f6fd;
+  padding: 2rem 1.5rem 2rem 2.5rem;
+  border-right: 2px dashed #e0e7ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.dayview-panel {
+  width: 50%;
+  min-width: 0;
+  background: #f8fafc;
+  padding: 2rem 2.5rem 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+@media (max-width: 900px) {
+  .calendar-body {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+  }
+
+  .calendar-panel,
+  .dayview-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 1.2rem;
+    border-right: none;
+    border-bottom: 2px dashed #e0e7ff;
+  }
+
+  .calendar-panel {
+    border-bottom: 2px dashed #e0e7ff;
+  }
+
+  .dayview-panel {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .calendar-panel,
+  .dayview-panel {
+    padding: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.1rem 1rem;
+  }
+
+  .planify-title {
+    font-size: 1.5rem;
+    margin: 0.7rem 0 0.3rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 0.7rem 0.2rem;
+  }
+
+  .calendar-body {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .calendar-panel,
+  .dayview-panel {
+    padding: 0.7rem;
+  }
+}
+
+/* Header */
 .nav-button {
   background: #f1f5f9;
   border: 1.5px solid #c7d2fe;
@@ -108,39 +220,6 @@
   background: rgba(255, 255, 255, 0.18);
 }
 
-/* Calendar + DayView layout */
-.calendar-body {
-  display: flex;
-  flex-direction: row;
-  min-height: 600px;
-  height: calc(100vh - 120px);
-  overflow: hidden;
-  gap: 0.7rem;
-}
-
-/* Panels */
-.calendar-panel {
-  width: 65%;
-  min-width: 0;
-  transition: width 0.2s;
-  position: relative;
-  padding-left: 2.5rem;
-  padding-right: 1.5rem;
-  overflow-y: auto;
-  background: #f3f6fd;
-  border-right: 2px dashed #e0e7ff;
-}
-
-.dayview-panel {
-  width: 35%;
-  min-width: 260px;
-  max-width: 400px;
-  transition: width 0.2s;
-  background: #f8fafc;
-  padding: 1.5rem 2.5rem 1.5rem 1.5rem;
-  overflow: visible;
-}
-
 /* Dropdowns */
 .dropdown {
   position: absolute;
@@ -199,95 +278,6 @@
   }
 }
 
-@media (max-width: 900px) {
-  .calendar-body {
-    flex-direction: column;
-    height: auto;
-    min-height: 0;
-    gap: 0.7rem;
-  }
-
-  .calendar-panel,
-  .dayview-panel {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    padding: 1.2rem;
-    border-right: none;
-    border-bottom: 2px dashed #e0e7ff;
-  }
-
-  .app-container {
-    padding: 0.2rem 0.02rem;
-  }
-
-  .calendar-wrapper {
-    max-width: 100vw;
-    border-radius: 8px;
-  }
-
-  .planify-title {
-    font-size: 1.5rem;
-    margin: 0.7rem 0 0.3rem 0;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .calendar-panel,
-  .dayview-panel {
-    padding: 0.7rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .calendar-header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.1rem 1rem;
-  }
-
-  .month-year {
-    font-size: 1.3rem;
-  }
-
-  .nav-button {
-    width: 36px;
-    height: 36px;
-    font-size: 1.3rem;
-  }
-
-  .dropdown {
-    min-width: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-container {
-    padding: 0.7rem 0.2rem;
-  }
-
-  .calendar-body {
-    border-radius: 0 0 16px 16px;
-    min-height: 0;
-  }
-
-  .calendar-panel,
-  .dayview-panel {
-    padding: 0.7rem;
-  }
-}
-
-.planify-title {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #1976d2;
-  letter-spacing: 2px;
-  text-align: center;
-  margin: 1.1rem 0 0.2rem 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 .new-header-layout {
   display: flex;
   justify-content: space-between;
@@ -297,12 +287,6 @@
   border-bottom: 2px solid #e0e7ff;
   box-shadow: 0 2px 8px rgba(56, 189, 248, 0.07);
   gap: 1.5rem;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
 }
 
 .header-right {
