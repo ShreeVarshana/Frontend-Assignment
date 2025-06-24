@@ -11,7 +11,7 @@
 
 .calendar-wrapper {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   background: #fff;
   border-radius: 18px;
@@ -62,7 +62,7 @@
 }
 
 .calendar-panel {
-  width: 65%;
+  width: 72%;
   min-width: 0;
   background: #f3f6fd;
   padding: 2rem 1.5rem 2rem 2.5rem;
@@ -75,7 +75,7 @@
 }
 
 .dayview-panel {
-  width: 35%;
+  width: 28%;
   min-width: 0;
   background: #f8fafc;
   padding: 2rem 2.5rem 2rem 1.5rem;
@@ -267,12 +267,18 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+  .calendar-wrapper {
+    max-width: 100vw;
+  }
+
   .calendar-panel {
+    width: 68%;
     padding-left: 1.2rem;
     padding-right: 0.7rem;
   }
 
   .dayview-panel {
+    width: 32%;
     padding: 1.2rem 1.2rem 1.2rem 0.7rem;
   }
 
