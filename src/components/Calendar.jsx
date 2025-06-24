@@ -63,18 +63,18 @@ export default function Calendar({ currentDate, events, onDateClick }) {
   const MAX_EVENTS_DISPLAY = 2;
 
   return (
-    <div className="calendar">
+    <div className="calendar simple-calendar">
       {/* Weekday headers */}
-      <div className="calendar-weekdays">
+      <div className="calendar-weekdays simple-weekdays">
         {weekdays.map(weekday => (
-          <div key={weekday} className="weekday">
+          <div key={weekday} className="weekday simple-weekday">
             {weekday}
           </div>
         ))}
       </div>
 
       {/* Calendar days */}
-      <div className="calendar-days">
+      <div className="calendar-days simple-days">
         {calendarDays.map(day => {
           const dayEvents = getEventsForDate(day);
           const isCurrentMonth = day.month() === currentDate.month();
@@ -85,6 +85,7 @@ export default function Calendar({ currentDate, events, onDateClick }) {
           return (
             <div
               key={day.format("YYYY-MM-DD")}
+
               className={`day ${isCurrentMonth ? "current-month" : "other-month"} ${isToday ? "today" : ""}`}
               onClick={() => onDateClick(day)}
               tabIndex={0}
@@ -103,6 +104,7 @@ export default function Calendar({ currentDate, events, onDateClick }) {
                     key={event.id}
                     event={event}
                     hasConflict={conflictMap.has(event.id)}
+                    showTime={false}
                   />
                 ))}
                 {showMore && (

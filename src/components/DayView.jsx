@@ -1,9 +1,9 @@
 // DayView.jsx
-import React from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import "./DayView.css";
 
-export default function DayView({ selectedDate, events }) {
+export default function DayView({ selectedDate, events, onToday }) {
   const dateString = selectedDate.format("YYYY-MM-DD");
   const dayEvents = events
     .filter(event => event.date === dateString)
@@ -39,6 +39,7 @@ export default function DayView({ selectedDate, events }) {
 
   return (
     <div className="dayview">
+      <button className="today-button" onClick={onToday}>Today</button>
       <div className="dayview-header">
         <h2> {selectedDate.format("dddd, MMMM D, YYYY")} </h2>
       </div>
