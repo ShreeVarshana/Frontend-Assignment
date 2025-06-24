@@ -1,0 +1,244 @@
+/* DayView.css */
+.day-view {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.day-view-header {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.back-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.day-view-title h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.day-view-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.time-column {
+  width: 80px;
+  background: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.time-slot {
+  height: 60px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: flex-start;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.time-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.events-column {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  background: white;
+}
+
+.hour-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1440px;
+  /* 24 hours * 60px */
+}
+
+.hour-line {
+  height: 60px;
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.hour-line:nth-child(even) {
+  background: #fafbfc;
+}
+
+.day-event {
+  border-radius: 4px;
+  margin-right: 10px;
+  min-height: 30px;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.day-event:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.day-event-content {
+  padding: 0.5rem;
+  color: white;
+  width: 100%;
+  overflow: hidden;
+}
+
+.day-event-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.day-event-time {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* Current time indicator */
+.current-time-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ef4444;
+  z-index: 20;
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.3);
+}
+
+.current-time-line::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  background: #ef4444;
+  border-radius: 50%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .day-view-header {
+    padding: 1rem;
+  }
+
+  .day-view-title h2 {
+    font-size: 1.25rem;
+  }
+
+  .back-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .time-column {
+    width: 60px;
+  }
+
+  .time-slot {
+    height: 50px;
+    padding: 0.25rem;
+  }
+
+  .time-label {
+    font-size: 0.65rem;
+  }
+
+  .hour-line {
+    height: 50px;
+  }
+
+  .hour-lines {
+    height: 1200px;
+    /* 24 hours * 50px */
+  }
+
+  .day-event-content {
+    padding: 0.25rem;
+  }
+
+  .day-event-title {
+    font-size: 0.75rem;
+  }
+
+  .day-event-time {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .day-view-header {
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .back-button {
+    margin-right: 0;
+  }
+
+  .day-view-title h2 {
+    font-size: 1.1rem;
+  }
+
+  .time-column {
+    width: 50px;
+  }
+
+  .time-slot {
+    height: 40px;
+    padding: 0.2rem;
+  }
+
+  .time-label {
+    font-size: 0.6rem;
+  }
+
+  .hour-line {
+    height: 40px;
+  }
+
+  .hour-lines {
+    height: 960px;
+    /* 24 hours * 40px */
+  }
+}

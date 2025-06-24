@@ -34,7 +34,7 @@ const detectConflicts = (events) => {
   return conflictMap;
 };
 
-export default function Calendar({ currentDate, events }) {
+export default function Calendar({ currentDate, events, onDateClick }) {
   const startOfMonth = currentDate.startOf("month");
   const endOfMonth = currentDate.endOf("month");
   const startOfCalendar = startOfMonth.startOf("week");
@@ -83,6 +83,7 @@ export default function Calendar({ currentDate, events }) {
               key={day.format("YYYY-MM-DD")}
               className={`day ${isCurrentMonth ? "current-month" : "other-month"} ${isToday ? "today" : ""
                 }`}
+              onClick={() => onDateClick(day)}
             >
               <div className="date-number">{day.format("D")}</div>
               <div className="events">

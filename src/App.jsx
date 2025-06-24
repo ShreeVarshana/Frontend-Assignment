@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "./components/Calendar";
+import DayView from "./components/DayView";
 import dayjs from "dayjs";
 import eventsData from "./data/events.json";
 import "./App.css";
@@ -16,6 +17,7 @@ const yearRangeOptions = [
 
 export default function App() {
   const [currentDate, setCurrentDate] = useState(dayjs());
+  const [selectedDate, setSelectedDate] = useState(null);
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [showYearPicker, setShowYearPicker] = useState(false);
   const [showYearRangePicker, setShowYearRangePicker] = useState(false);
@@ -59,71 +61,93 @@ export default function App() {
     setShowYearRangePicker(false);
   };
 
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleBackToMonth = () => {
+    setSelectedDate(null);
+  };
+
   return (
     <div className="app-container" onClick={handleOverlayClick}>
       <div className="calendar-wrapper" onClick={(e) => e.stopPropagation()}>
-        <div className="calendar-header">
-          <button onClick={handlePrevMonth} className="nav-button">‹</button>
+        {selectedDate ? (
+          <DayView
+            selectedDate={selectedDate}
+            events={eventsData}
+            onBackToMonth={handleBackToMonth}
+          />
+        ) : (
+          <>
+            <div className="calendar-header">
+              <button onClick={handlePrevMonth} className="nav-button">‹</button>
 
-          <div className="date-controls">
-            {/* Month */}
-            <span className="month-year clickable" onClick={(e) => {
-              e.stopPropagation();
-              setShowMonthPicker(!showMonthPicker);
-              setShowYearPicker(false);
-              setShowYearRangePicker(false);
-            }}>
-              {currentDate.format("MMMM")}
-            </span>
+              <div className="date-controls">
+                {/* Month */}
+                <span className="month-year clickable" onClick={(e) => {
+                  e.stopPropagation();
+                  setShowMonthPicker(!showMonthPicker);
+                  setShowYearPicker(false);
+                  setShowYearRangePicker(false);
+                }}>
+                  {currentDate.format("MMMM")}
+                </span>
 
-            {/* Year */}
-            <span className="month-year clickable" onClick={(e) => {
-              e.stopPropagation();
-              setShowYearRangePicker(!showYearRangePicker);
-              setShowYearPicker(false);
-              setShowMonthPicker(false);
-            }}>
-              {currentDate.format("YYYY")}
-            </span>
+                {/* Year */}
+                <span className="month-year clickable" onClick={(e) => {
+                  e.stopPropagation();
+                  setShowYearRangePicker(!showYearRangePicker);
+                  setShowYearPicker(false);
+                  setShowMonthPicker(false);
+                }}>
+                  {currentDate.format("YYYY")}
+                </span>
 
-            {/* Month Picker */}
-            {showMonthPicker && (
-              <div className="dropdown">
-                {monthNames.map((m, i) => (
-                  <div key={m} className="dropdown-item" onClick={() => handleMonthSelect(i)}>
-                    {m}
+                {/* Month Picker */}
+                {showMonthPicker && (
+                  <div className="dropdown">
+                    {monthNames.map((m, i) => (
+                      <div key={m} className="dropdown-item" onClick={() => handleMonthSelect(i)}>
+                        {m}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
+                )}
 
-            {/* Year Range Picker */}
-            {showYearRangePicker && (
-              <div className="dropdown">
-                {yearRangeOptions.map((range) => (
-                  <div key={range} className="dropdown-item" onClick={() => handleYearRangeSelect(range)}>
-                    {range}
+                {/* Year Range Picker */}
+                {showYearRangePicker && (
+                  <div className="dropdown">
+                    {yearRangeOptions.map((range) => (
+                      <div key={range} className="dropdown-item" onClick={() => handleYearRangeSelect(range)}>
+                        {range}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
+                )}
 
-            {/* Year Picker */}
-            {showYearPicker && (
-              <div className="dropdown">
-                {yearOptions.map((y) => (
-                  <div key={y} className="dropdown-item" onClick={() => handleYearSelect(y)}>
-                    {y}
+                {/* Year Picker */}
+                {showYearPicker && (
+                  <div className="dropdown">
+                    {yearOptions.map((y) => (
+                      <div key={y} className="dropdown-item" onClick={() => handleYearSelect(y)}>
+                        {y}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
-            )}
-          </div>
 
-          <button onClick={handleNextMonth} className="nav-button">›</button>
-        </div>
+              <button onClick={handleNextMonth} className="nav-button">›</button>
+            </div>
 
-        <Calendar currentDate={currentDate} events={eventsData} />
+            <Calendar
+              currentDate={currentDate}
+              events={eventsData}
+              onDateClick={handleDateClick}
+            />
+          </>
+        )}
       </div>
     </div>
   );
