@@ -14,21 +14,31 @@ export default function EventBadge({ event, hasConflict, showTime = true }) {
     return end.format("h:mm A");
   };
 
+  // For calendar grid view, show only title and conflict indicator
+  if (!showTime) {
+    return (
+      <div
+        className={`event-badge ${hasConflict ? "conflict" : ""}`}
+        title={`${event.title} - ${formatTime(event.time)} to ${getEndTime(event.time, event.duration)}`}
+      >
+        <span className="event-title">
+          {event.title}
+          {hasConflict && <span className="conflict-indicator">⚠️</span>}
+        </span>
+      </div>
+    );
+  }
+
+  // For day view, show full details
   return (
     <div className={`event-badge ${hasConflict ? "conflict" : ""}`}>
-      <div className="event-title">{event.title}
-        {!showTime && hasConflict && (
-          <span className="conflict-indicator"> ⚠️</span>
+      <div className="event-title">{event.title}</div>
+      <div className="event-time">
+        {formatTime(event.time)} - {getEndTime(event.time, event.duration)}
+        {hasConflict && (
+          <span className="conflict-indicator">⚠️</span>
         )}
       </div>
-      {showTime && (
-        <div className="event-time">
-          {formatTime(event.time)} - {getEndTime(event.time, event.duration)}
-          {hasConflict && (
-            <span className="conflict-indicator"> ⚠️</span>
-          )}
-        </div>
-      )}
     </div>
   );
 }

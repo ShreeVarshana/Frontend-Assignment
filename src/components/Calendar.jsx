@@ -1,5 +1,5 @@
 // Calendar.jsx
-import React from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import EventBadge from "./EventBadge";
 import "./Calendar.css";
@@ -35,6 +35,8 @@ const detectConflicts = (events) => {
 };
 
 export default function Calendar({ currentDate, events, onDateClick }) {
+  const [expandedDay, setExpandedDay] = useState(null);
+
   const startOfMonth = currentDate.startOf("month");
   const endOfMonth = currentDate.endOf("month");
   const startOfCalendar = startOfMonth.startOf("week");
@@ -60,6 +62,14 @@ export default function Calendar({ currentDate, events, onDateClick }) {
       .sort((a, b) => a.time.localeCompare(b.time));
   };
 
+  // Maximum events to show before "more" indicator
+  const MAX_VISIBLE_EVENTS = 3;
+
+  const handleMoreClick = (dayKey, e) => {
+    e.stopPropagation();
+    setExpandedDay(expandedDay === dayKey ? null : dayKey);
+  };
+
   return (
     <div className="calendar">
       {/* Weekday headers */}
@@ -76,10 +86,16 @@ export default function Calendar({ currentDate, events, onDateClick }) {
           const dayEvents = getEventsForDate(day);
           const isCurrentMonth = day.month() === currentDate.month();
           const isToday = day.isSame(today, "day");
+          const dayKey = day.format("YYYY-MM-DD");
+          const isExpanded = expandedDay === dayKey;
+
+          const visibleEvents = isExpanded ? dayEvents : dayEvents.slice(0, MAX_VISIBLE_EVENTS);
+          const hasMoreEvents = dayEvents.length > MAX_VISIBLE_EVENTS;
+          const moreCount = dayEvents.length - MAX_VISIBLE_EVENTS;
 
           return (
             <div
-              key={day.format("YYYY-MM-DD")}
+              key={dayKey}
               className={`day ${isCurrentMonth ? "current-month" : "other-month"} ${isToday ? "today" : ""}`}
               onClick={() => onDateClick(day)}
               tabIndex={0}
@@ -92,8 +108,8 @@ export default function Calendar({ currentDate, events, onDateClick }) {
               }}
             >
               <div className="date-number">{day.format("D")}</div>
-              <div className="events all-events-scroll">
-                {dayEvents.map(event => (
+              <div className="events">
+                {visibleEvents.map(event => (
                   <EventBadge
                     key={event.id}
                     event={event}
@@ -101,6 +117,22 @@ export default function Calendar({ currentDate, events, onDateClick }) {
                     showTime={false}
                   />
                 ))}
+                {hasMoreEvents && !isExpanded && (
+                  <div
+                    className="more-indicator"
+                    onClick={(e) => handleMoreClick(dayKey, e)}
+                  >
+                    +{moreCount} more
+                  </div>
+                )}
+                {hasMoreEvents && isExpanded && (
+                  <div
+                    className="more-indicator"
+                    onClick={(e) => handleMoreClick(dayKey, e)}
+                  >
+                    Show less
+                  </div>
+                )}
               </div>
             </div>
           );
