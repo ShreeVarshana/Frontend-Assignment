@@ -1,17 +1,38 @@
 /* App.css */
+html,
+body,
+#root,
+.app-container,
+.calendar-wrapper {
+  width: 100vw;
+  height: 100vh;
+  min-height: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .app-container {
   background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
-  min-height: 100vh;
-  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  width: 100vw;
+  height: 100vh;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .calendar-wrapper {
   width: 100vw;
+  height: 100vh;
   max-width: none;
+  max-height: none;
   margin: 0;
   background: #fff;
   border-radius: 18px;
@@ -20,16 +41,17 @@
   display: flex;
   flex-direction: column;
   border: 1.5px solid #e0e7ff;
-  min-height: 80vh;
+  min-height: 0;
+  min-width: 0;
 }
 
 .planify-title {
-  font-size: 2.2rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #1976d2;
   letter-spacing: 2px;
   text-align: center;
-  margin: 1.1rem 0 0.2rem 0;
+  margin: 0.5rem 0 0.1rem 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -37,11 +59,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 1.7rem 2.2rem;
+  padding: 0.7rem 1rem;
   background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
   color: #fff;
   border-bottom: 2px solid #e0e7ff;
   box-shadow: 0 2px 8px rgba(56, 189, 248, 0.07);
+  font-size: 1rem;
 }
 
 .header-left {
@@ -54,18 +77,20 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  min-height: 600px;
-  height: calc(100vh - 120px);
+  height: 100%;
+  min-height: 0;
   overflow: hidden;
   gap: 0;
   align-items: stretch;
 }
 
 .calendar-panel {
-  width: 72%;
+  /* 2.5/4 = 62.5% */
+  width: 62.5%;
+  flex: 2.5 2.5 0%;
   min-width: 0;
   background: #f3f6fd;
-  padding: 2rem 1.5rem 2rem 2.5rem;
+  padding: 0.7rem 0.5rem 0.7rem 0.7rem;
   border-right: 2px dashed #e0e7ff;
   display: flex;
   flex-direction: column;
@@ -75,10 +100,12 @@
 }
 
 .dayview-panel {
-  width: 28%;
+  /* 1.5/4 = 37.5% */
+  width: 37.5%;
+  flex: 1.5 1.5 0%;
   min-width: 0;
   background: #f8fafc;
-  padding: 2rem 2.5rem 2rem 1.5rem;
+  padding: 0.7rem 0.7rem 0.7rem 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -101,6 +128,8 @@
     padding: 1.2rem;
     border-right: none;
     border-bottom: 2px dashed #e0e7ff;
+    height: auto;
+    flex: none;
   }
 
   .calendar-panel {
@@ -346,16 +375,6 @@
   top: 100%;
   margin-top: 0.2rem;
   z-index: 1002;
-}
-
-/* Remove unwanted vertical scrolls */
-html,
-body,
-#root,
-.app-container,
-.calendar-wrapper {
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .calendar-body {
