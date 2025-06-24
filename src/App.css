@@ -58,10 +58,11 @@
   height: calc(100vh - 120px);
   overflow: hidden;
   gap: 0;
+  align-items: stretch;
 }
 
 .calendar-panel {
-  width: 50%;
+  width: 65%;
   min-width: 0;
   background: #f3f6fd;
   padding: 2rem 1.5rem 2rem 2.5rem;
@@ -70,10 +71,11 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  height: 100%;
 }
 
 .dayview-panel {
-  width: 50%;
+  width: 35%;
   min-width: 0;
   background: #f8fafc;
   padding: 2rem 2.5rem 2rem 1.5rem;
@@ -81,6 +83,7 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
+  height: 100%;
 }
 
 @media (max-width: 900px) {
