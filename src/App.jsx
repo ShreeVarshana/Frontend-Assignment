@@ -1,9 +1,8 @@
-// App.jsx
 import React, { useState, useEffect } from "react";
 import Calendar from "./components/Calendar";
 import DayView from "./components/DayView";
 import dayjs from "dayjs";
-import eventsData from "./data/events.json"; // ✅ Import directly from src/data
+import eventsData from "./data/events.json";
 import "./App.css";
 
 const monthNames = [
@@ -21,7 +20,7 @@ export default function App() {
 
   // Load events once from imported JSON
   useEffect(() => {
-    setEvents(eventsData); // ✅ Set events from imported file
+    setEvents(eventsData);
   }, []);
 
   useEffect(() => {
@@ -70,6 +69,18 @@ export default function App() {
     setShowMonthPicker(false);
   };
 
+  const handleAddTask = (title, time, duration) => {
+    if (!title || !time || !duration) return;
+    const newEvent = {
+      id: Date.now(),
+      title,
+      date: selectedDate.format('YYYY-MM-DD'),
+      time,
+      duration: parseInt(duration, 10)
+    };
+    setEvents(prev => [...prev, newEvent]);
+  };
+
   return (
     <div className="app-container" onClick={handleOverlayClick}>
       <div className="calendar-wrapper" onClick={(e) => e.stopPropagation()}>
@@ -115,7 +126,7 @@ export default function App() {
             <Calendar currentDate={currentDate} events={events} onDateClick={handleDateClick} />
           </div>
           <div className="dayview-panel">
-            <DayView selectedDate={selectedDate} events={events} onToday={handleToday} />
+            <DayView selectedDate={selectedDate} events={events} onToday={handleToday} onAddTask={handleAddTask} />
           </div>
         </div>
       </div>

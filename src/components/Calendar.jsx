@@ -1,4 +1,3 @@
-// Calendar.jsx
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import EventBadge from "./EventBadge";

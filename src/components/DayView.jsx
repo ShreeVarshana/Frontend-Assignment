@@ -1,9 +1,8 @@
-// DayView.jsx
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import "./DayView.css";
 
-export default function DayView({ selectedDate, events, onToday }) {
+export default function DayView({ selectedDate, events, onToday, onAddTask }) {
   const dateString = selectedDate.format("YYYY-MM-DD");
   const dayEvents = events
     .filter(event => event.date === dateString)
@@ -29,10 +28,26 @@ export default function DayView({ selectedDate, events, onToday }) {
   }
 
   const formatTime = (time) => dayjs(`2000-01-01 ${time}`).format("h:mm A");
+  const getEndTime = (startTime, duration) => {
+    const start = dayjs(`2000-01-01 ${startTime}`);
+    const end = start.add(duration, 'minute');
+    return end.format("h:mm A");
+  };
 
   return (
     <div className="dayview">
-      <button className="today-button" onClick={onToday}>Today</button>
+      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '1rem' }}>
+        <button className="today-button" onClick={onToday}>Today</button>
+        <button className="add-task-button" onClick={() => {
+          const title = prompt('Enter task title:');
+          if (!title) return;
+          const time = prompt('Enter start time (HH:mm):');
+          if (!time) return;
+          const duration = prompt('Enter duration (minutes):');
+          if (!duration) return;
+          onAddTask(title, time, duration);
+        }}>Add Tasks</button>
+      </div>
       <div className="dayview-header">
         <h2> {selectedDate.format("dddd, MMMM D, YYYY")} </h2>
       </div>
@@ -43,7 +58,7 @@ export default function DayView({ selectedDate, events, onToday }) {
           dayEvents.map(event => (
             <div key={event.id} className={`dayview-event${conflictIds.has(event.id) ? " conflict" : ""}`}>
               <div className="event-title">{event.title}</div>
-              <div className="event-time">{formatTime(event.time)} - {event.duration} min</div>
+              <div className="event-time">{formatTime(event.time)} - {getEndTime(event.time, event.duration)}</div>
               {conflictIds.has(event.id) && (
                 <div className="conflict-warning">⚠ Conflict with another task</div>
               )}

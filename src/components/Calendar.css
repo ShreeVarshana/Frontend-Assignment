@@ -1,4 +1,3 @@
-/* Calendar.css */
 .calendar {
   width: 100%;
   max-width: none;
@@ -267,7 +266,7 @@
   }
 
   .event-badge {
-    font-size: 0.35rem;
+    font-size: 0.2rem;
   }
 
   .more-indicator {
