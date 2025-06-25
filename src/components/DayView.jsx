@@ -37,8 +37,8 @@ export default function DayView({ selectedDate, events, onToday, onAddTask }) {
   return (
     <div className="dayview">
       <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '1rem' }}>
-        <button className="today-button" onClick={onToday}>Today</button>
-        <button className="add-task-button" onClick={() => {
+        <button className="today-button dayview-action-button" onClick={onToday}>Today</button>
+        <button className="add-task-button dayview-action-button" onClick={() => {
           const title = prompt('Enter task title:');
           if (!title) return;
           const time = prompt('Enter start time (HH:mm):');

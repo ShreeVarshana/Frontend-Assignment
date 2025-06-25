@@ -30,8 +30,7 @@
   border-radius: 16px 16px 0 0;
 }
 
-.today-button {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+.dayview-action-button {
   color: white;
   border: none;
   border-radius: 8px;
@@ -46,7 +45,15 @@
   overflow: hidden;
 }
 
-.today-button::before {
+.today-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.add-task-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dayview-action-button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -57,55 +64,18 @@
   transition: left 0.5s;
 }
 
-.today-button:hover::before {
+.dayview-action-button:hover::before {
   left: 100%;
 }
 
-.today-button:hover {
+.dayview-action-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
 }
 
-.today-button:active {
+.dayview-action-button:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-}
-
-.add-task-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
-  margin-bottom: 1.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.add-task-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.add-task-button:hover::before {
-  left: 100%;
-}
-
-.add-task-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.4);
 }
 
 .dayview-header {
@@ -258,7 +228,7 @@
     font-size: 1.1rem;
   }
 
-  .today-button {
+  .dayview-action-button {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
   }
@@ -279,7 +249,7 @@
     border-radius: 8px;
   }
 
-  .today-button {
+  .dayview-action-button {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }
@@ -302,7 +272,7 @@
     border-radius: 4px;
   }
 
-  .today-button {
+  .dayview-action-button {
     padding: 0.3rem 0.6rem;
     font-size: 0.75rem;
   }
