@@ -77,35 +77,37 @@ export default function App() {
         <div className="calendar-header">
           <div className="header-left">
             <button onClick={handlePrevMonth} className="nav-button">‹</button>
+            <button onClick={handleNextMonth} className="nav-button">›</button>
             <div className="date-display">
               <span className="month-year">{currentDate.format("MMMM YYYY")}</span>
-              <div className="picker-buttons">
+            </div>
+            <div className="picker-buttons">
+              <div style={{ position: 'relative', display: 'inline-block' }}>
                 <button onClick={toggleMonthPicker} className="picker-button">Month</button>
+                {showMonthPicker && (
+                  <div className="dropdown month-dropdown">
+                    {monthNames.map((month, index) => (
+                      <div key={month} className="dropdown-item" onClick={() => handleMonthSelect(index)}>
+                        {month}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div style={{ position: 'relative', display: 'inline-block' }}>
                 <button onClick={toggleYearPicker} className="picker-button">Year</button>
+                {showYearPicker && (
+                  <div className="dropdown year-dropdown">
+                    {yearOptions.map((year) => (
+                      <div key={year} className="dropdown-item" onClick={() => handleYearSelect(year)}>
+                        {year}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-            <button onClick={handleNextMonth} className="nav-button">›</button>
           </div>
-
-          {showMonthPicker && (
-            <div className="dropdown month-dropdown">
-              {monthNames.map((month, index) => (
-                <div key={month} className="dropdown-item" onClick={() => handleMonthSelect(index)}>
-                  {month}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {showYearPicker && (
-            <div className="dropdown year-dropdown">
-              {yearOptions.map((year) => (
-                <div key={year} className="dropdown-item" onClick={() => handleYearSelect(year)}>
-                  {year}
-                </div>
-              ))}
-            </div>
-          )}
         </div>
 
         <div className="calendar-body">

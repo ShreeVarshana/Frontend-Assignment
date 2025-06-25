@@ -109,7 +109,7 @@
 }
 
 .date-number {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #1e293b;
   margin-bottom: 2px;
@@ -142,7 +142,7 @@
 }
 
 .event-badge {
-  font-size: 0.65rem;
+  font-size: 0.5rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -213,7 +213,7 @@
   }
 
   .event-badge {
-    font-size: 0.6rem;
+    font-size: 0.45rem;
   }
 }
 
@@ -240,7 +240,7 @@
   }
 
   .event-badge {
-    font-size: 0.55rem;
+    font-size: 0.4rem;
   }
 }
 
@@ -267,7 +267,7 @@
   }
 
   .event-badge {
-    font-size: 0.5rem;
+    font-size: 0.35rem;
   }
 
   .more-indicator {
